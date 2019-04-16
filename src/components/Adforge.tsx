@@ -35,6 +35,11 @@ const AdforgeStyles = styled.div`
   .flex-column {
     flex-direction: column;
   }
+  .inner-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
   input {
     font-size: 20px;
@@ -67,6 +72,7 @@ const AdforgeStyles = styled.div`
   }
 
   .large {
+    margin-left: 25px;
     width: 300px;
     height: 600px;
   }
@@ -126,20 +132,24 @@ export const Adforge: React.FC<{}> = () => {
   <AdforgeStyles>
     <div className="wrapper">
       <h1>AdForge Preview</h1>
+      <Input propogateSubmit={updateUuid} />
       <div className="message">
         <div>{!state && <p>Enter a valid ad uuid to see it render in different sizes</p>}</div>
         <div>{state && <p>Here's your ad:</p>}</div>
       </div>
-      <Input propogateSubmit={updateUuid} />
-      <div className="flex-container flex-column" style={{marginTop: "20px"}}>
-        <Ad cxs={['adforge-ad small']} uuid={state} />
-        <div className="flex-container flex-row" style={{ justifyContent: "space-between", marginTop: "20px"}}>
-          <div className="inner-wrapper">
-            <Ad cxs={['adforge-ad small-rect']} uuid={state} />
-            <Ad cxs={['adforge-ad small-square']} uuid={state} />
+      <div className="flex-container flex-column" style={{marginTop: "25px"}}>
+        {state && (
+          <div>
+            <Ad cxs={['adforge-ad small']} uuid={state} />
+            <div className="flex-container flex-row" style={{ justifyContent: "center", marginTop: "50px"}}>
+              <div className="inner-wrapper" style={{marginRight: "25px"}}>
+                <Ad cxs={['adforge-ad small-rect']} uuid={state} />
+                <Ad cxs={['adforge-ad small-square']} uuid={state} />
+              </div>
+              <Ad cxs={['adforge-ad large']} uuid={state} />
+            </div>
           </div>
-          <Ad cxs={['adforge-ad large']} uuid={state} />
-        </div>
+        )}
       </div>
    </div>
   </AdforgeStyles>

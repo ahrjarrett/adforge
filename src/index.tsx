@@ -5,9 +5,6 @@ import { theme } from './styles/theme'
 
 import Router from './components/routes'
 import * as serviceWorker from './serviceWorker'
-import Amplify from 'aws-amplify'
-import config from './aws-exports'
-Amplify.configure(config)
 
 const Root: React.FC<{}> = () => (
   <React.Fragment>
