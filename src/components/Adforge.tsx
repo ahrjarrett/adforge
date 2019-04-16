@@ -25,6 +25,9 @@ const AdforgeStyles = styled.div`
     font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
     color: #24292e;
   }
+  p {
+    margin: 25px auto;
+  }
 
   .flex-container {
     display: flex;
@@ -131,7 +134,7 @@ export const Adforge: React.FC<{}> = () => {
   return (
   <AdforgeStyles>
     <div className="wrapper">
-      <h1 style="">AdForge Preview</h1>
+      <h1 style={{ marginBottom: "10px"}}>AdForge Preview</h1>
       <Input propogateSubmit={updateUuid} />
       <div className="message" style={{ margin: "25px auto" }} >
         <div>{!state && <p>Enter a valid ad uuid to see it render in different sizes</p>}</div>

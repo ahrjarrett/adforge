@@ -1,0 +1,14 @@
+{
+    "local": {
+        "awscloudformation": {
+            "AuthRoleName": "adforge-20190415214257-authRole",
+            "UnauthRoleArn": "arn:aws:iam::942055413099:role/adforge-20190415214257-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::942055413099:role/adforge-20190415214257-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "adforge-20190415214257-deployment",
+            "UnauthRoleName": "adforge-20190415214257-unauthRole",
+            "StackName": "adforge-20190415214257",
+            "StackId": "arn:aws:cloudformation:us-east-1:942055413099:stack/adforge-20190415214257/57b641b0-5ff1-11e9-949b-0af7a73fd784"
+        }
+    }
+}
