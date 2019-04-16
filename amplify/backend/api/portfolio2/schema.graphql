@@ -1,0 +1,15 @@
+type Project @model {
+  id: ID!
+  type: String!
+  name: String!
+  description: String!
+  url: String!
+  repo: String!
+  date: String!
+  slug: String!
+  imgName: String!
+  thumbnailName: String!
+  thumbnailPosition: String
+  tags: [String]!
+  tech: [String]!
+}
