@@ -131,9 +131,9 @@ export const Adforge: React.FC<{}> = () => {
   return (
   <AdforgeStyles>
     <div className="wrapper">
-      <h1>AdForge Preview</h1>
+      <h1 style="">AdForge Preview</h1>
       <Input propogateSubmit={updateUuid} />
-      <div className="message">
+      <div className="message" style={{ margin: "25px auto" }} >
         <div>{!state && <p>Enter a valid ad uuid to see it render in different sizes</p>}</div>
         <div>{state && <p>Here's your ad:</p>}</div>
       </div>
