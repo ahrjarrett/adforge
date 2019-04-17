@@ -1,5 +1,4 @@
 import * as React from 'react'
-import styled from 'styled-components'
 import { GlobalStyles } from '../styles/GlobalStyles'
 import { AdforgeStyles } from "../styles/Adforge.styles"
 import Ares from "./Ares"

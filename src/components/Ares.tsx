@@ -1,5 +1,7 @@
 import * as React from "react"
-import AdUnit from "../own-local/ad-unit"
+// import AdUnit from "../own-local/ad-unit"
+import AdUnit from "@own-local/ad-unit/lib/AdUnit.js"
+// import Auth from "@aws-amplify/auth"
 
 const CustomImage = {
   logo: null,
