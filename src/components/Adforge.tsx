@@ -104,17 +104,20 @@ export const Adforge: React.FC<{}> = () => {
             />
           </div>
 
-          <p>Enter offsets (square not working yet):</p>
+          <p>ENTER A NUMBER FROM -50 TO 50 TO REPOSITION EACH OF THE BACKGROUND IMAGE. CERTAIN OFFSETS MAY ONLY AFFECT CERTAIN AD SIZES.</p>
+          <p>Horizontal ad image offset:</p>
           <Input 
             propogateSubmit={updateOffsets('horizontal')} 
             defaultState={0}
             placeholder="Enter horizontal offset here..."
           />
+          <p>Vertical ad image offset:</p>
           <Input 
             propogateSubmit={updateOffsets('vertical')} 
             defaultState={0}
             placeholder="Enter vertical offset here..."
           />
+          <p>Square ad image offset:</p>
           <Input 
             propogateSubmit={updateOffsets('square')} 
             defaultState={0}

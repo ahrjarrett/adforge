@@ -1,0 +1,47 @@
+{
+  "name": "@own-local/ad-utils",
+  "version": "1.0.2",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "description": "The ares ad utilities.",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "npm run build:ts && npm run build:js",
+    "build:ts": "tsc --emitDeclarationOnly",
+    "build:ts:watch": "npm run build:ts --watch",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline --copy-files",
+    "build:js:watch": "npm run build:js --watch",
+    "fresh": "rm -rf node_modules reports lib",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "test:ci": "echo \"AD UTILS --> No tests for the ad utils\"",
+    "test:watch": "echo \"AD UTILS --> No tests for the ad utils\"",
+    "coverage:ci": "echo \"AD UTILS --> No tests for the ad utils\"",
+    "coverage": "echo \"AD UTILS --> No tests for the ad utils\"",
+    "deploy:branch": "echo \"AD UTILS --> No deploys for the ad utils\"",
+    "deploy:staging": "echo \"AD UTILS --> No deploys for the ad utils\"",
+    "deploy:prod": "echo \"AD UTILS --> No deploys for the ad utils\"",
+    "test": "echo \"AD UTILS --> No tests for the ad utils\""
+  },
+  "author": "Alex Maingot (maingot@ownlocal.com)",
+  "peerDependencies": {
+    "react": "^16.5.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.0.0",
+    "@types/node": "^10.12.4",
+    "@types/react": "^16.4.16",
+    "@types/react-dom": "^16.0.9",
+    "react": "^16.5.2"
+  },
+  "gitHead": "41d2dd6bcb92462d455c26afa004df24e96a8ead"
+}

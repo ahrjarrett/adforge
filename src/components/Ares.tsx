@@ -1,5 +1,5 @@
 import * as React from "react"
-import AdUnit from "@own-local/ad-unit"
+import AdUnit from "../own-local/ad-unit"
 
 const CustomImage = {
   logo: null,
@@ -91,8 +91,14 @@ const Ares = (props: AresProps) => {
     <AdUnit
       data={adRecord}
       layout={1}
-      track={(category, action, label) => return undefined}
-      translateString={(id, locale, defaultValue, options) => return undefined}
+      track={(category, action, label) => {
+        console.log('track function args:', category, action, label)
+        return null
+      }}
+      translateString={(id, locale, defaultValue, options) => {
+        console.log('translate function args:', id, locale, defaultValue, options)
+        return null
+      }}
       style={{height: props.height, width: props.width}}
     />
   )
