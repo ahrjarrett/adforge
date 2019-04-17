@@ -1,91 +1,9 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { GlobalStyles } from '../styles/GlobalStyles'
+import { AdforgeStyles } from "../styles/Adforge.styles"
+import Ares from "./Ares"
 
-const AdforgeStyles = styled.div`
-  html {
-    margin: 0;
-    padding: 0;
-  }
-  body {
-    margin: 0 auto;
-    padding: 0;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  iframe {
-    border: 0;
-  }
-  .wrapper {
-    margin: 0 auto;
-    width: 100%;
-    max-width: 728px;
-  }
-
-  h1, p, input {
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
-    color: #24292e;
-  }
-  p {
-    margin: 25px auto;
-  }
-
-  .flex-container {
-    display: flex;
-  }
-  .flex-row {
-    flex-direction: row;
-  }
-  .flex-column {
-    flex-direction: column;
-  }
-  .inner-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  input {
-    font-size: 20px;
-    padding: 4px 10px;
-    border-radius: 3px;
-    border: 1px solid lightgrey;
-    font-family: Helvetica;
-    width: 400px;
-  }
-
-  .adforge-ad {
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-    border: 0 none;
-    display: block;
-  }
-
-  .small {
-    width: 728px;
-    height: 90px;
-  }
-
-  .small-rect {
-    width: 300px;
-    height: 250px;
-  }
-
-  .small-square {
-    width: 300px;
-    height: 300px;
-  }
-
-  .large {
-    margin-left: 25px;
-    width: 300px;
-    height: 600px;
-  }
-
-  @media screen and (max-width: 999px) {
-  .small {
-  }
-  .small-rect {
-  }
-`
 
 interface AdI {
   cxs: string[]
@@ -94,29 +12,29 @@ interface AdI {
 
 const Ad = ({ cxs, uuid }) => (
   <div className="adforge-ad-wrapper">
-    <iframe 
+    <iframe
       className={`${cxs.join(' ')}`}
       src={`https://origami.secure.ownlocal.com/origami_unit/index.html?id=${uuid}`}
+      style={{ backgroundPosition: "25% 25%" }}
     />
   </div>
 )
 
-function Input({ propogateSubmit }) {
-  const [state, setState] = React.useState("")
+function Input({ propogateSubmit, defaultState, placeholder }) {
+  const [state, setState] = React.useState(defaultState)
   const handleSubmit = (e) => {
     e.preventDefault()
     propogateSubmit(state)
-    setState("")
+    // setState(state)
   }
-
 
   return (
     <div className="uuid-input">
       <form onSubmit={handleSubmit} >
-        <input 
-          placeholder="Enter ad uuid here..." 
-          value={state} 
-          onChange={(e) => setState(e.target.value)} 
+        <input
+          placeholder={placeholder}
+          value={state}
+          onChange={(e) => setState(e.target.value)}
         />
       </form>
     </div>
@@ -124,38 +42,110 @@ function Input({ propogateSubmit }) {
 }
 
 export const Adforge: React.FC<{}> = () => {
-  const [state, setState] = React.useState("")
+  const [image, setImage] = React.useState("https://i.imgur.com/UMaXbSD.jpg")
+  const [offsets, setOffsets] = React.useState({ horizontal: 0, vertical: 0, square: 0 })
+  const [headlines, setHeadlines] = React.useState(['1', '2', '3'])
+
   const inputRef = React.createRef()
-  const updateUuid = uuid => {
-    console.log("updating uuid, uuid:", uuid)
-    setState(uuid)
+  const updateImage = url => {
+    console.log("updating image, image url:", url)
+    setImage(url)
+  }
+
+  const updateHeadlines = n => headline => {
+    console.log("updating headline, index + headline:", n, headline)
+    setHeadlines([...headlines.slice(0, n - 1), headline, ...headlines.slice(n)])
+  }
+
+  const updateOffsets = key => offset => {
+    console.log("updating offsets, offsets:", key, offset)
+    setOffsets({ ...offsets, [key]: parseInt(offset, 10) })
   }
 
   return (
-  <AdforgeStyles>
-    <div className="wrapper">
-      <h1 style={{ marginBottom: "10px"}}>AdForge Preview</h1>
-      <Input propogateSubmit={updateUuid} />
-      <div className="message" style={{ margin: "25px auto" }} >
-        <div>{!state && <p>Enter a valid ad uuid to see it render in different sizes</p>}</div>
-        <div>{state && <p>Here's your ad:</p>}</div>
-      </div>
-      <div className="flex-container flex-column" style={{marginTop: "25px"}}>
-        {state && (
-          <div>
-            <Ad cxs={['adforge-ad small']} uuid={state} />
-            <div className="flex-container flex-row" style={{ justifyContent: "center", marginTop: "50px"}}>
-              <div className="inner-wrapper" style={{marginRight: "25px"}}>
-                <Ad cxs={['adforge-ad small-rect']} uuid={state} />
-                <Ad cxs={['adforge-ad small-square']} uuid={state} />
-              </div>
-              <Ad cxs={['adforge-ad large']} uuid={state} />
-            </div>
+    <React.Fragment>
+      <GlobalStyles />
+      <AdforgeStyles>
+        <div className="wrapper">
+          <h1 style={{ marginBottom: "10px" }}>AdForge Preview</h1>
+          <p>Enter image URL:</p>
+          <Input 
+            propogateSubmit={updateImage} 
+            defaultState='' 
+            placeholder="Enter image url here..."
+          />
+
+          <p>Enter headlines:</p>
+          <Input 
+            propogateSubmit={updateHeadlines(1)}
+            defaultState={headlines[0]}
+            placeholder="Enter headline 1 here..."
+          />
+
+          <Input 
+            propogateSubmit={updateHeadlines(2)}
+            defaultState={headlines[1]}
+            placeholder="Enter headline 2 here..."
+          />
+
+          <Input 
+            propogateSubmit={updateHeadlines(3)}
+            defaultState={headlines[2]}
+            placeholder="Enter headline 3 here..."
+          />
+
+          <div className="ad-unit-wrapper">
+            <Ares
+              image={image}
+              offsets={offsets}
+              headlines={headlines}
+              height="728"
+              width="90"
+            />
           </div>
-        )}
-      </div>
-   </div>
-  </AdforgeStyles>
+
+          <p>Enter offsets (square not working yet):</p>
+          <Input 
+            propogateSubmit={updateOffsets('horizontal')} 
+            defaultState={0}
+            placeholder="Enter horizontal offset here..."
+          />
+          <Input 
+            propogateSubmit={updateOffsets('vertical')} 
+            defaultState={0}
+            placeholder="Enter vertical offset here..."
+          />
+          <Input 
+            propogateSubmit={updateOffsets('square')} 
+            defaultState={0}
+            placeholder="Enter square offset here..."
+          />
+        </div>
+      </AdforgeStyles>
+    </React.Fragment>
 
   )
 }
+
+
+// OLD:
+// <p>Sample UUID: 3cd1b99a-76d3-4a4b-8c60-5023abbb772c</p>
+// <Input propogateSubmit={updateUuid} />
+// <div className="message" style={{ margin: "25px auto" }} >
+//   <div>{!state && <p>Enter a valid ad uuid to see it render in different sizes</p>}</div>
+//   <div>{state && <p>Here's your ad:</p>}</div>
+// </div>
+// <div className="flex-container flex-column" style={{ marginTop: "25px" }}>
+//   {state && (
+//     <div>
+//       <Ad cxs={['adforge-ad small']} uuid={state} />
+//       <div className="flex-container flex-row" style={{ justifyContent: "center", marginTop: "50px" }}>
+//         <div className="inner-wrapper" style={{ marginRight: "25px" }}>
+//           <Ad cxs={['adforge-ad small-rect']} uuid={state} />
+//           <Ad cxs={['adforge-ad small-square']} uuid={state} />
+//         </div>
+//         <Ad cxs={['adforge-ad large']} uuid={state} />
+//       </div>
+//     </div>
+//   )}
+// </div>
