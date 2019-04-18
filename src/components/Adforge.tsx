@@ -128,7 +128,7 @@ export const Adforge: React.FC<{}> = () => {
             </div>
           </div>
 
-          <p>ENTER A NUMBER FROM -50 TO 50 TO REPOSITION EACH OF THE BACKGROUND IMAGE. CERTAIN OFFSETS MAY ONLY AFFECT CERTAIN AD SIZES.</p>
+          <p style={{ lineHeight: 1.35 }}>ENTER A NUMBER FROM -50 TO 50 TO REPOSITION EACH OF THE BACKGROUND IMAGE. CERTAIN OFFSETS MAY ONLY AFFECT CERTAIN AD SIZES.</p>
           <p>Horizontal ad image offset:</p>
           <Input 
             propogateSubmit={updateOffsets('vertical')} 
@@ -153,34 +153,9 @@ export const Adforge: React.FC<{}> = () => {
             <PreviewImage src={image} offsets={offsets} dimensions={{width: 300, height: 240}} target="300x300" />
             <PreviewImage src={image} offsets={offsets} dimensions={{width: 300, height: 310}} target="300x600" />
           </div>
-
-
         </div>
       </AdforgeStyles>
     </React.Fragment>
 
   )
 }
-
-
-// OLD:
-// <p>Sample UUID: 3cd1b99a-76d3-4a4b-8c60-5023abbb772c</p>
-// <Input propogateSubmit={updateUuid} />
-// <div className="message" style={{ margin: "25px auto" }} >
-//   <div>{!state && <p>Enter a valid ad uuid to see it render in different sizes</p>}</div>
-//   <div>{state && <p>Here's your ad:</p>}</div>
-// </div>
-// <div className="flex-container flex-column" style={{ marginTop: "25px" }}>
-//   {state && (
-//     <div>
-//       <Ad cxs={['adforge-ad small']} uuid={state} />
-//       <div className="flex-container flex-row" style={{ justifyContent: "center", marginTop: "50px" }}>
-//         <div className="inner-wrapper" style={{ marginRight: "25px" }}>
-//           <Ad cxs={['adforge-ad small-rect']} uuid={state} />
-//           <Ad cxs={['adforge-ad small-square']} uuid={state} />
-//         </div>
-//         <Ad cxs={['adforge-ad large']} uuid={state} />
-//       </div>
-//     </div>
-//   )}
-// </div>

@@ -119,7 +119,7 @@ interface AresProps {
     horizontal: number, vertical: number, square: number
   }
   headlines: string[]
-  dimesions: {
+  dimensions: {
     height: string
     width: string
   }
@@ -130,14 +130,9 @@ const Ares = (props: AresProps) => {
   const { horizontal, vertical, square } = offsets
   const { width, height } = dimensions
 
-// const makeAd = (img, headlines, horizontal, vertical, square) => ({
-
   const value = transformToPayload(makeAd({ img: image, headlines, horizontal, vertical, square }), business)
   const json = JSON.stringify(value)
   const record: string = window.btoa(json);
-  console.log("record:", record)
-  console.log("json:", json)
-  console.log("value:", value)
 
   return (
     <div>
