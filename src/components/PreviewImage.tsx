@@ -93,6 +93,8 @@ export class PreviewImage extends React.Component<PreviewImageProps, PreviewImag
     let positionX = (constrictedBy === 'x' ? 0 : ((vUnit * 50) + offsetX))
     let positionY = (constrictedBy === 'y' ? 0 : ((vUnit * 50) + offsetY))
     
+    let borderWidth = 4
+
     console.log("\n\noffsetX:", offsetX)
     console.log("offsetY:", offsetY)
     console.log("positionX:", positionX)
@@ -108,7 +110,15 @@ export class PreviewImage extends React.Component<PreviewImageProps, PreviewImag
         </div>
         <div style={{ position: 'absolute', width: x, height: y, right: 0 }}>
           <img src={src} ref={this.imgRef} style={{ position: 'absolute', right: '0', top: 0 }} />
-          <div style={{ position: 'absolute', right: `${positionX}px`, top: `${positionY}px`, background: 'rgba(100, 200, 100, 0.5)', width: unit * 300, height: unit * 200 }} />
+          <div style={{ 
+            position: 'absolute', 
+            right: `${positionX - borderWidth}px`, 
+            top: `${positionY - borderWidth}px`, 
+            background: 'rgba(100, 200, 100, 0.0)',
+            width: unit * viewportX + (borderWidth * 2), 
+            height: unit * viewportY + (borderWidth * 2),
+            border: `${borderWidth}px solid green`
+          }} />
         </div>
       </div>
 
