@@ -2,6 +2,7 @@ import * as React from 'react'
 import { GlobalStyles } from '../styles/GlobalStyles'
 import { AdforgeStyles } from "../styles/Adforge.styles"
 import Ares from "./Ares"
+import { PreviewImage } from "./PreviewImage"
 
 
 interface AdI {
@@ -41,11 +42,10 @@ function Input({ propogateSubmit, defaultState, placeholder }) {
 }
 
 export const Adforge: React.FC<{}> = () => {
-  const [image, setImage] = React.useState("https://i.imgur.com/UMaXbSD.jpg")
+  const [image, setImage] = React.useState("https://i.imgur.com/YxyS3X2.jpg")
   const [offsets, setOffsets] = React.useState({ horizontal: 0, vertical: 0, square: 0 })
   const [headlines, setHeadlines] = React.useState(['1', '2', '3'])
 
-  const inputRef = React.createRef()
   const updateImage = url => {
     console.log("updating image, image url:", url)
     setImage(url)
@@ -60,6 +60,7 @@ export const Adforge: React.FC<{}> = () => {
     console.log("updating offsets, offsets:", key, offset)
     setOffsets({ ...offsets, [key]: parseInt(offset, 10) })
   }
+
 
   return (
     <React.Fragment>
@@ -106,13 +107,13 @@ export const Adforge: React.FC<{}> = () => {
           <p>ENTER A NUMBER FROM -50 TO 50 TO REPOSITION EACH OF THE BACKGROUND IMAGE. CERTAIN OFFSETS MAY ONLY AFFECT CERTAIN AD SIZES.</p>
           <p>Horizontal ad image offset:</p>
           <Input 
-            propogateSubmit={updateOffsets('horizontal')} 
+            propogateSubmit={updateOffsets('vertical')} 
             defaultState={0}
             placeholder="Enter horizontal offset here..."
           />
           <p>Vertical ad image offset:</p>
           <Input 
-            propogateSubmit={updateOffsets('vertical')} 
+            propogateSubmit={updateOffsets('horizontal')} 
             defaultState={0}
             placeholder="Enter vertical offset here..."
           />
@@ -122,6 +123,7 @@ export const Adforge: React.FC<{}> = () => {
             defaultState={0}
             placeholder="Enter square offset here..."
           />
+          <PreviewImage src={image} offsets={offsets} />
         </div>
       </AdforgeStyles>
     </React.Fragment>

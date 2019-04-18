@@ -16,6 +16,7 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     overflow-wrap: break-word;
     word-wrap: break-word;
+    overflow: visible !important;
   }
 
   ${fontDeclarations};

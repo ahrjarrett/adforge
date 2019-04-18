@@ -1,29 +1,19 @@
 import styled from "styled-components"
 
 export const AdforgeStyles = styled.div`
-  html {
-    margin: 0;
-    padding: 0;
-  }
-  body {
-    margin: 0 auto;
-    padding: 0;
-    width: 100%;
-    box-sizing: border-box;
-  }
   iframe {
     border: 0;
   }
   .wrapper {
-    margin: 0 auto 100px;
+    margin: 0 100px 100px auto;
     width: 100%;
     max-width: 728px;
   }
 
   .ad-unit-wrapper {
     position: absolute;
-    top: 300px;
-    left: 400px;
+    top: 270px;
+    left: 50px;
   }
 
   h1 {

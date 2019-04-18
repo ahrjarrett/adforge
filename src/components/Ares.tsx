@@ -6,13 +6,13 @@ import AdUnit from "@own-local/ad-unit/lib/AdUnit.js"
 const CustomImage = {
   logo: null,
   picture: {
-    sm: 'https://s3.amazonaws.com/ownlocal-services-production/public/images/categories/640/8e535c8a-960a-427b-908a-cecd8005aa18.jpeg',
-    md: 'https://s3.amazonaws.com/ownlocal-services-production/public/images/categories/640/8e535c8a-960a-427b-908a-cecd8005aa18.jpeg',
-    lg: 'https://s3.amazonaws.com/ownlocal-services-production/public/images/categories/640/8e535c8a-960a-427b-908a-cecd8005aa18.jpeg'
+    sm: '',
+    md: '',
+    lg: ''
   },
   offsets: {
-    horizontal: 10,
-    vertical: -20,
+    horizontal: 0,
+    vertical: 0,
     square: 0
   },
 }
@@ -87,22 +87,26 @@ const Ares = (props: AresProps) => {
   }
 
   console.log("adRecord:", adRecord)
-  
+
   // type Layout = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8'
   return (
-    <AdUnit
-      data={adRecord}
-      layout={1}
-      track={(category, action, label) => {
-        console.log('track function args:', category, action, label)
-        return null
-      }}
-      translateString={(id, locale, defaultValue, options) => {
-        console.log('translate function args:', id, locale, defaultValue, options)
-        return null
-      }}
-      style={{height: props.height, width: props.width}}
-    />
+    <div>
+      {console.log("offsets:", props.offsets)}
+      <AdUnit
+        data={adRecord}
+        layout={1}
+        track={(category, action, label) => {
+          console.log('track function args:', category, action, label)
+          return null
+        }}
+        translateString={(id, locale, defaultValue, options) => {
+          console.log('translate function args:', id, locale, defaultValue, options)
+          return null
+        }}
+        style={{height: props.height, width: props.width}}
+      />
+
+    </div>
   )
 }
 

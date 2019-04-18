@@ -32,10 +32,12 @@
     "isolatedModules": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "./src/components/Adforge.tsx",
+    "./src/components/Ares.tsx"
   ],
   "include": [
-    "./src/**/*.tsx",
+    // "./src/**/*.tsx",
     "./src/**/*.ts",
     "./images.d.ts"
   ]
