@@ -9,6 +9,10 @@ export const AdforgeStyles = styled.div`
     width: 100%;
     max-width: 600px;
   }
+  .sizes-wrapper {
+    margin: 0 auto;
+    max-width: 728px;
+  }
 
   .ad-unit-wrapper {
     position: absolute;
