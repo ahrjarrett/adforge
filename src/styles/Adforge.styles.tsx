@@ -5,16 +5,17 @@ export const AdforgeStyles = styled.div`
     border: 0;
   }
   .wrapper {
-    margin: 0 100px 100px auto;
+    margin: 0 0 0 auto;
     width: 100%;
-    max-width: 728px;
+    max-width: 600px;
   }
 
   .ad-unit-wrapper {
     position: absolute;
-    top: 270px;
+    top: 120px;
     left: 50px;
   }
+
 
   h1 {
     font-family: Cir Black, -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
@@ -57,6 +58,23 @@ export const AdforgeStyles = styled.div`
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
     border: 0 none;
     display: block;
+  }
+  
+  .preview-images {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    margin-bottom: 100px;
+    margin-top: 180px;
+    p {
+      margin-bottom: 0;
+      margin-top: 0;
+      padding-left: 50px;
+    }
+  }
+
+  .preview-image-wrapper {
+    // position: absolute; 
   }
 
   .small {

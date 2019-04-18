@@ -42,7 +42,7 @@ function Input({ propogateSubmit, defaultState, placeholder }) {
 }
 
 export const Adforge: React.FC<{}> = () => {
-  const [image, setImage] = React.useState("https://i.imgur.com/YxyS3X2.jpg")
+  const [image, setImage] = React.useState("https://i.imgur.com/do1G6aY.png")
   const [offsets, setOffsets] = React.useState({ horizontal: 0, vertical: 0, square: 0 })
   const [headlines, setHeadlines] = React.useState(['1', '2', '3'])
 
@@ -99,9 +99,33 @@ export const Adforge: React.FC<{}> = () => {
               image={image}
               offsets={offsets}
               headlines={headlines}
-              height="728"
-              width="90"
+              dimensions={{width: 728, height: 90}}
             />
+            <div className="flex-container flex-row" style={{justifyContent: "center", marginTop: "50px"}}>
+              <div className="inner-wrapper" style={{marginRight: '25px'}}>
+                <Ares
+                  image={image}
+                  offsets={offsets}
+                  headlines={headlines}
+                  dimensions={{width: 300, height: 250}}
+                />
+                <Ares
+                  image={image}
+                  offsets={offsets}
+                  headlines={headlines}
+                  dimensions={{width: 300, height: 300}}
+                />
+              </div>
+              <div style={{ marginLeft: "25px"}}>
+                <Ares
+                  image={image}
+                  offsets={offsets}
+                  headlines={headlines}
+                  dimensions={{width: 300, height: 600}}
+                />
+              </div>
+
+            </div>
           </div>
 
           <p>ENTER A NUMBER FROM -50 TO 50 TO REPOSITION EACH OF THE BACKGROUND IMAGE. CERTAIN OFFSETS MAY ONLY AFFECT CERTAIN AD SIZES.</p>
@@ -123,7 +147,14 @@ export const Adforge: React.FC<{}> = () => {
             defaultState={0}
             placeholder="Enter square offset here..."
           />
-          <PreviewImage src={image} offsets={offsets} />
+          <div className="preview-images">
+            <PreviewImage src={image} offsets={offsets} dimensions={{width: 528, height: 90}} target="728x90" />
+            <PreviewImage src={image} offsets={offsets} dimensions={{width: 300, height: 190}} target="300x250" />
+            <PreviewImage src={image} offsets={offsets} dimensions={{width: 300, height: 240}} target="300x300" />
+            <PreviewImage src={image} offsets={offsets} dimensions={{width: 300, height: 310}} target="300x600" />
+          </div>
+
+
         </div>
       </AdforgeStyles>
     </React.Fragment>

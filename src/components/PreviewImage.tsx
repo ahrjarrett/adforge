@@ -7,6 +7,11 @@ interface PreviewImageProps {
     vertical: number
     square: number
   }
+  dimensions: {
+    width: number
+    height: number
+  }
+  target: string
 }
 
 interface PreviewImageState {
@@ -54,11 +59,11 @@ export class PreviewImage extends React.Component<PreviewImageProps, PreviewImag
   }
 
   render() {
-    const { src, offsets } = this.props
+    const { src, offsets, dimensions, target } = this.props
 
     const { x, y } = this.state
-    const viewportX = 300
-    const viewportY = 200
+    const viewportX = dimensions.width
+    const viewportY = dimensions.height
 
     let xUnit = x / viewportX
     let yUnit = y / viewportY
@@ -68,7 +73,7 @@ export class PreviewImage extends React.Component<PreviewImageProps, PreviewImag
     let constrictingDimension = (xUnit < yUnit) ? x : y
 
     let viewportMax = constrictedBy === 'x' ? (viewportY * xUnit) : (viewportX * yUnit)
-    let viewport = constrictedBy === 'x' ? ({ x: x, y: viewportMax }) : ({ x: viewportMax, y: viewportY })
+    let viewport = constrictedBy === 'x' ? ({ x: x, y: viewportMax.toFixed(3) }) : ({ x: viewportMax, y: viewportY.toFixed(3) })
 
     let vDiff = constrictedBy === 'x' ? y - viewportMax : x - viewportMax
     let vUnit = vDiff / 100 // each % is 1 vUnit
@@ -90,10 +95,10 @@ export class PreviewImage extends React.Component<PreviewImageProps, PreviewImag
 
     let offsetX = (constrictedBy === 'x' ? 0 : (offsets.vertical * vUnit))
     let offsetY = (constrictedBy === 'y' ? 0 : (offsets.horizontal * vUnit))
-    let positionX = (constrictedBy === 'x' ? 0 : ((vUnit * 50) + offsetX))
-    let positionY = (constrictedBy === 'y' ? 0 : ((vUnit * 50) + offsetY))
+    let positionX = (constrictedBy === 'x' ? 0 : ((vUnit * 50) + offsetX)).toFixed(3)
+    let positionY = (constrictedBy === 'y' ? 0 : ((vUnit * 50) + offsetY)).toFixed(3)
     
-    let borderWidth = 4
+    let borderWidth = 0
 
     console.log("\n\noffsetX:", offsetX)
     console.log("offsetY:", offsetY)
@@ -102,19 +107,24 @@ export class PreviewImage extends React.Component<PreviewImageProps, PreviewImag
 
 
     return (
-      <div style={{ position: 'relative', marginBottom: '100px', marginTop: '180px' }}>
+      <div style={{position: "relative"}}>
         <div>
-          <p style={{ position: 'absolute', top: '-135px'}}>Image dimensions: {x && y ? `${x}px by ${y}px` : `Not available`}</p>
-          <p style={{ position: 'absolute', top: '-105px'}}>Crop your image to these dimensions: {x && y ? `${viewport.x}px by ${viewport.y}px` : `Not available`}</p>
-          <p style={{ position: 'absolute', top: '-75px'}}>When cropping, use these offsets (from top left): {x && y ? `${positionX}px by ${positionY}px` : `Not available`}</p>
+          <p>Original image dimensions:</p>
+          <p><b>{x && y ? `${x}px by ${y}px` : `Not available`}</b></p>
+          <p>{target} widget image size:</p>
+          <p><b>{dimensions.width}x{dimensions.height}</b></p>
+          <p>Crop your image to these dimensions:</p>
+          <p><b>{x && y ? `${viewport.x}px by ${viewport.y}px` : `Not available`}</b></p>
+          <p>When cropping, use these offsets (from top left):</p>
+          <p><b>{x && y ? `${positionX}px by ${positionY}px` : `Not available`}</b></p>
         </div>
-        <div style={{ position: 'absolute', width: x, height: y, right: 0 }}>
+        <div className="preview-image-wrapper" style={{ width: x, height: y, right: 0 }}>
           <img src={src} ref={this.imgRef} style={{ position: 'absolute', right: '0', top: 0 }} />
           <div style={{ 
             position: 'absolute', 
             right: `${positionX - borderWidth}px`, 
             top: `${positionY - borderWidth}px`, 
-            background: 'rgba(100, 200, 100, 0.0)',
+            background: 'rgba(100, 200, 100, 0.4)',
             width: unit * viewportX + (borderWidth * 2), 
             height: unit * viewportY + (borderWidth * 2),
             border: `${borderWidth}px solid green`
