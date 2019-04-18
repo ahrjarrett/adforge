@@ -34,8 +34,8 @@ export class PreviewImage extends React.Component<PreviewImageProps, PreviewImag
   }
 
   componentDidUpdate(prevProps) {
-    console.log('component updating, x:', this.state.x)
-    console.log('component updating, y:', this.state.y)
+    // console.log('component updating, x:', this.state.x)
+    // console.log('component updating, y:', this.state.y)
 
     this.calculateFrame()
 
@@ -73,31 +73,42 @@ export class PreviewImage extends React.Component<PreviewImageProps, PreviewImag
     let vDiff = constrictedBy === 'x' ? y - viewportMax : x - viewportMax
     let vUnit = vDiff / 100 // each % is 1 vUnit
 
-    console.log('\n\n x & y:', x, y)
+    // console.log('\n\n x & y:', x, y)
 
-    console.log("unit:", unit)
-    console.log("unit:", unit * 300)
-    console.log("unit:", unit * 200)
+    // console.log("unit:", unit)
+    // console.log("unit:", unit * 300)
+    // console.log("unit:", unit * 200)
 
-    console.log('xUnit, yUnit:', xUnit, yUnit)
-    console.log("constricted by", constrictedBy)
-    console.log("constricting dimension", constrictingDimension)
-    console.log("viewportMax:", viewportMax)
-    console.log("viewport:", viewport)
+    // console.log('xUnit, yUnit:', xUnit, yUnit)
+    // console.log("constricted by", constrictedBy)
+    // console.log("constricting dimension", constrictingDimension)
+    // console.log("viewportMax:", viewportMax)
+    // console.log("viewport:", viewport)
 
-    console.log("vDiff", vDiff)
-    console.log("vUnit", vUnit)
+    // console.log("vDiff", vDiff)
+    // console.log("vUnit", vUnit)
 
+    let offsetX = (constrictedBy === 'x' ? 0 : (offsets.vertical * vUnit))
+    let offsetY = (constrictedBy === 'y' ? 0 : (offsets.horizontal * vUnit))
+    let positionX = (constrictedBy === 'x' ? 0 : ((vUnit * 50) + offsetX))
+    let positionY = (constrictedBy === 'y' ? 0 : ((vUnit * 50) + offsetY))
+    
+    console.log("\n\noffsetX:", offsetX)
+    console.log("offsetY:", offsetY)
+    console.log("positionX:", positionX)
+    console.log("positionY:", positionY)
 
 
     return (
-      <div style={{ position: 'relative', marginBottom: '100px', marginTop: '100px' }}>
+      <div style={{ position: 'relative', marginBottom: '100px', marginTop: '180px' }}>
         <div>
-          <p style={{ position: 'absolute', top: '-70px'}} >Image dimensions: {x && y ? `${x}px by ${y}px` : `Not available`}</p>
+          <p style={{ position: 'absolute', top: '-135px'}}>Image dimensions: {x && y ? `${x}px by ${y}px` : `Not available`}</p>
+          <p style={{ position: 'absolute', top: '-105px'}}>Crop your image to these dimensions: {x && y ? `${viewport.x}px by ${viewport.y}px` : `Not available`}</p>
+          <p style={{ position: 'absolute', top: '-75px'}}>When cropping, use these offsets (from top left): {x && y ? `${positionX}px by ${positionY}px` : `Not available`}</p>
         </div>
         <div style={{ position: 'absolute', width: x, height: y, right: 0 }}>
           <img src={src} ref={this.imgRef} style={{ position: 'absolute', right: '0', top: 0 }} />
-          <div style={{ position: 'absolute', right: `${constrictedBy === 'x' ? 0 : (offsets.vertical + 50) * vUnit}px`, top: `${constrictedBy === 'y' ? 0 : (offsets.horizontal + 50) * vUnit}px`, background: 'rgba(100, 200, 100, 0.5)', width: unit * 300, height: unit * 200 }} />
+          <div style={{ position: 'absolute', right: `${positionX}px`, top: `${positionY}px`, background: 'rgba(100, 200, 100, 0.5)', width: unit * 300, height: unit * 200 }} />
         </div>
       </div>
 

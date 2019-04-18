@@ -47,17 +47,17 @@ export const Adforge: React.FC<{}> = () => {
   const [headlines, setHeadlines] = React.useState(['1', '2', '3'])
 
   const updateImage = url => {
-    console.log("updating image, image url:", url)
+    // console.log("updating image, image url:", url)
     setImage(url)
   }
 
   const updateHeadlines = n => headline => {
-    console.log("updating headline, index + headline:", n, headline)
+    // console.log("updating headline, index + headline:", n, headline)
     setHeadlines([...headlines.slice(0, n - 1), headline, ...headlines.slice(n)])
   }
 
   const updateOffsets = key => offset => {
-    console.log("updating offsets, offsets:", key, offset)
+    // console.log("updating offsets, offsets:", key, offset)
     setOffsets({ ...offsets, [key]: parseInt(offset, 10) })
   }
 
